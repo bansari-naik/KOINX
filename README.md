@@ -47,8 +47,6 @@ npm run start
 - Invalid numeric API values such as `null`, `undefined`, `NaN`, and `Infinity` are sanitized to `0`.
 - Savings and tax-impact comparisons are based on raw internal values, not rounded UI values.
 
-## Notes
+## Deployment - Vercel
 
-- If mobile testing is done over LAN during development, `allowedDevOrigins` is configured in `next.config.ts`.
-- If you see stale dev behavior, stop the dev server, delete `.next`, and restart `npm run dev`.
-
+- https://koinx-eta-three.vercel.app/
