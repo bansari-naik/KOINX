@@ -77,18 +77,18 @@ function HoldingsTableSkeleton() {
       </div>
 
       <div className="mt-5 overflow-hidden rounded-2xl border border-white/5">
-        <div className="bg-[#0b0d16] px-4 py-4">
+        <div className="bg-[#0b0d16] px-3 py-3.5 md:px-4">
           <Skeleton className="h-5 w-full" />
         </div>
-        <div className="space-y-3 p-4">
+        <div className="space-y-2.5 p-3 md:p-4">
           {Array.from({ length: 6 }).map((_, index) => (
             <div
               key={index}
-              className="grid grid-cols-[36px_1.7fr_1.2fr_1fr_1fr_1fr_1.1fr] gap-4 rounded-2xl border border-white/5 bg-white/[0.02] px-3 py-4"
+              className="grid grid-cols-[32px_1.65fr_1.15fr_0.95fr_0.95fr_0.95fr_1fr] gap-3 rounded-2xl border border-white/5 bg-white/[0.02] px-3 py-3.5"
             >
               <Skeleton className="h-5 w-5 rounded-md" />
-              <div className="flex items-center gap-3">
-                <Skeleton className="h-10 w-10 rounded-full" />
+              <div className="flex items-center gap-2.5">
+                <Skeleton className="h-9 w-9 rounded-full" />
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-20" />
                   <Skeleton className="h-3 w-28" />
@@ -266,30 +266,30 @@ export function HoldingsTable({
       {!error && holdings.length > 0 ? (
         <div className="mt-5 overflow-hidden rounded-2xl border border-white/5">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[980px] border-collapse">
+            <table className="w-full min-w-[920px] border-collapse">
               <thead className="bg-[#0b0d16] text-left text-sm text-white">
                 <tr>
-                  <th className="w-14 px-4 py-4">
+                  <th className="w-12 px-3 py-3.5 md:px-4">
                     <Checkbox checked={allSelected} onCheckedChange={onToggleAll} aria-label="Select all holdings" />
                   </th>
-                  <th className="px-4 py-4 font-medium">Asset</th>
-                  <th className="px-4 py-4 font-medium">
-                    Holdings
-                    <span className="mt-1 block text-xs font-normal text-[#8c97b8]">Avg Buy Price</span>
+                  <th className="px-3 py-3.5 font-medium md:px-4">Asset</th>
+                  <th className="px-3 py-3.5 font-medium md:px-4">
+                    <span className="block leading-none">Holdings</span>
+                    <span className="mt-1 block text-[11px] font-normal leading-none text-[#8c97b8]">Avg buy price</span>
                   </th>
-                  <th className="px-4 py-4 font-medium">Current Price</th>
-                  <th className="px-4 py-4 font-medium">
+                  <th className="px-3 py-3.5 font-medium md:px-4">Current Price</th>
+                  <th className="px-3 py-3.5 font-medium md:px-4">
                     <button
                       type="button"
                       onClick={onToggleSort}
-                      className="inline-flex items-center gap-2 text-left"
+                      className="inline-flex items-center gap-1.5 text-left"
                     >
                       <ArrowUp className={cn("h-3.5 w-3.5 transition", sortDirection === "desc" && "rotate-180")} />
                       Short-Term
                     </button>
                   </th>
-                  <th className="px-4 py-4 font-medium">Long-Term</th>
-                  <th className="px-4 py-4 font-medium">Amount to Sell</th>
+                  <th className="px-3 py-3.5 font-medium md:px-4">Long-Term</th>
+                  <th className="px-3 py-3.5 font-medium md:px-4">Amount to Sell</th>
                 </tr>
               </thead>
               <tbody className="bg-[#151824]">
@@ -307,61 +307,67 @@ export function HoldingsTable({
                         isSelected ? "bg-[#17264d]" : "hover:bg-white/[0.03]",
                       )}
                     >
-                      <td className="px-4 py-4">
+                      <td className="px-3 py-3.5 align-top md:px-4">
                         <Checkbox
                           checked={isSelected}
                           onCheckedChange={() => onToggleCoin(holdingKey)}
                           aria-label={`Select ${holding.coin} ${holding.coinName}`}
                         />
                       </td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10">
+                      <td className="px-3 py-3.5 align-top md:px-4">
+                        <div className="flex items-center gap-2.5">
+                          <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-white/10">
                             <Image
                               src={holding.logo}
                               alt={holding.coinName}
                               fill
                               className="object-cover"
-                              sizes="40px"
+                              sizes="36px"
                             />
                           </div>
-                          <div>
-                            <p className="max-w-[180px] truncate text-[15px] font-medium text-white md:max-w-[220px]">
+                          <div className="min-w-0">
+                            <p className="max-w-[160px] truncate text-[14px] font-medium leading-tight text-white md:max-w-[200px]">
                               {holding.coin}
                             </p>
-                            <p className="max-w-[180px] truncate text-sm text-[#9aa7c7] md:max-w-[220px]">
+                            <p className="mt-1 max-w-[160px] truncate text-[13px] leading-tight text-[#9aa7c7] md:max-w-[200px]">
                               {holding.coinName}
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-white">
-                        <p className="text-[15px] font-medium">{formatUnits(holding.totalHolding, holding.coin)}</p>
-                        <p className="mt-1 text-sm text-[#9aa7c7]">
+                      <td className="px-3 py-3.5 align-top text-white md:px-4">
+                        <p className="whitespace-nowrap text-[14px] font-medium leading-tight">
+                          {formatUnits(holding.totalHolding, holding.coin)}
+                        </p>
+                        <p className="mt-1 whitespace-nowrap text-[13px] leading-tight text-[#9aa7c7]">
                           <FinancialValue amount={toPreciseAmount(holding.averageBuyPrice)} align="left" />
                           <span>{` / ${holding.coin}`}</span>
                         </p>
                       </td>
-                      <td className="px-4 py-4 text-[15px] font-medium text-white">
+                      <td className="px-3 py-3.5 align-top text-[14px] font-medium leading-tight text-white md:px-4">
                         <FinancialValue amount={toPreciseAmount(holding.currentPrice)} align="left" />
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-3 py-3.5 align-top md:px-4">
                         <FinancialValue
                           amount={toPreciseAmount(holding.stcg.gain)}
                           align="left"
-                          className={cn("text-[15px] font-semibold", shortTermClass)}
+                          className={cn("text-[14px] font-semibold leading-tight", shortTermClass)}
                         />
-                        <p className="mt-1 text-sm text-[#9aa7c7]">{formatUnits(holding.stcg.balance, holding.coin)}</p>
+                        <p className="mt-1 whitespace-nowrap text-[13px] leading-tight text-[#9aa7c7]">
+                          {formatUnits(holding.stcg.balance, holding.coin)}
+                        </p>
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-3 py-3.5 align-top md:px-4">
                         <FinancialValue
                           amount={toPreciseAmount(holding.ltcg.gain)}
                           align="left"
-                          className={cn("text-[15px] font-semibold", longTermClass)}
+                          className={cn("text-[14px] font-semibold leading-tight", longTermClass)}
                         />
-                        <p className="mt-1 text-sm text-[#9aa7c7]">{formatUnits(holding.ltcg.balance, holding.coin)}</p>
+                        <p className="mt-1 whitespace-nowrap text-[13px] leading-tight text-[#9aa7c7]">
+                          {formatUnits(holding.ltcg.balance, holding.coin)}
+                        </p>
                       </td>
-                      <td className="px-4 py-4 text-[15px] font-medium text-white">
+                      <td className="px-3 py-3.5 align-top text-[14px] font-medium leading-tight text-white md:px-4">
                         {isSelected ? formatUnits(holding.totalHolding, holding.coin) : "-"}
                       </td>
                     </tr>
